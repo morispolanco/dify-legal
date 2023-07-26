@@ -26,7 +26,7 @@ if st.button('Send'):
             "inputs": {},
             "query": user_input,
             "response_mode": "streaming",
-            "conversation_id": "8af2c01e-bf0a-4429-984c-33d7f5ccf029",
+            "conversation_id": "https://udify.app/chat/vEbc2xBhFVj24l6w",
             "user": "abc-123"
         })
 
