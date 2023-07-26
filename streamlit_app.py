@@ -4,7 +4,6 @@ from datetime import datetime
 
 secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ' # Replace with your actual key
 
-
 def send_data(user, message):
     url = 'https://api.dify.ai/v1/chat-messages'
     headers = {
@@ -16,7 +15,8 @@ def send_data(user, message):
         "query": message,
         "response_mode": "streaming",
         "conversation_id"
-    } 
+        "user"
+    }
     response = requests.post(url, headers=headers, json=data)
     try:
         response = response.json()
