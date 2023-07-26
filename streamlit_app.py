@@ -1,12 +1,11 @@
 import streamlit as st
 import requests
-                                                                              
 
 def send_message(query):
-    url = 'https://api.dify.ai/v1'
+    url = 'https://api.dify.ai/v1/chat-messages'
     headers = {
-        'Authorization: Bearer Bapp-cGt4ZVQJ94qGNMthIXMPQj1l',
-        'Content-Type: application/json',
+        'Authorization': 'Bearer Bapp-cGt4ZVQJ94qGNMthIXMPQj1l',
+        'Content-Type': 'application/json',
     }
     payload = {
         "inputs": {},
