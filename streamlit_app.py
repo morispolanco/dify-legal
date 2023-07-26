@@ -1,44 +1,34 @@
 import streamlit as st
 import requests
-import json
+from datetime import datetime
 
-def send_message(query):
+secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ' # Replace with your actual key
+
+def send_data(user, message):
     url = 'https://api.dify.ai/v1/chat-messages'
     headers = {
-        'Authorization': 'Bearer app-OZw6qix4wsjQl4MUTmlpEukZ',
-        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {secret_key}',
+        'Content-Type': 'application/json'
     }
-    payload = {
+    data = {
         "inputs": {},
-        "query": query,
+        "query": message,
         "response_mode": "streaming",
-        "user": "abc-123"
+        "conversation_id":
+        "user": usermp
     }
+    response = requests.post(url, headers=headers, json=data)
+    return response
 
-    try:
-        response = requests.post(url, headers=headers, json=payload)
-        response.raise_for_status()
-
-        response_json = response.json()
-
-        if 'answer' in response_json:
-            return response_json['answer']
-        else:
-            return f'Error: The response did not contain a valid answer field. Response data: {response_json}'
-    except requests.exceptions.HTTPError as e:
-        return f'Error (Code {e.response.status_code}): {e.response.text}'
-    except json.JSONDecodeError as e:
-        return f'Error decoding JSON response: {response.text}'
-
-def main():
-    st.title("Chat Application")
-
-    user_input = st.text_input("Enter a message:")
-
-    if st.button("Send"):
-        st.write("You:", user_input)
-        response = send_message(user_input)
-        st.write("Chatbot:", response)
+def run_chat():
+    st.title('Streamlit Chat App')
+    st.subheader('Enter your username and messages')
+    user = st.text_input('Username')
+    message = st.text_input('Message')
+    if st.button('Send'):
+        response = send_data(user, message)
+        st.write(response.json())
+    st.text('Chat History')
 
 if __name__ == "__main__":
-    main()
+    run_chat()
