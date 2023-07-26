@@ -1,8 +1,7 @@
 import streamlit as st
 import requests
-from datetime import datetime
 
-secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ' # Replace with your actual key
+secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ'
 
 def send_data(user, message):
     url = 'https://api.dify.ai/v1/chat-messages'
@@ -14,13 +13,14 @@ def send_data(user, message):
         "inputs": {},
         "query": message,
         "response_mode": "streaming",
-        "conversation_id"
-        "user"
+        "conversation_id": 
+        "user": user
     }
     response = requests.post(url, headers=headers, json=data)
     try:
         response = response.json()
     except ValueError:
+        st.write('Server response might not contain JSON content.')
         st.write(f'Response status code: {response.status_code}')
         st.write(f'Response content: {response.content}')
     return response
