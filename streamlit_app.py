@@ -4,6 +4,7 @@ from datetime import datetime
 
 secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ' # Replace with your actual key
 
+
 def send_data(user, message):
     url = 'https://api.dify.ai/v1/chat-messages'
     headers = {
@@ -19,12 +20,11 @@ def send_data(user, message):
     }
     response = requests.post(url, headers=headers, json=data)
     try:
-        response_json = response.json()
+        response = response.json()
     except ValueError:
         st.write(f'Response status code: {response.status_code}')
         st.write(f'Response content: {response.content}')
-        response_json = None
-    return response_json
+    return response
 
 def run_chat():
     st.title('Streamlit Chat App')
@@ -33,7 +33,7 @@ def run_chat():
     message = st.text_input('Message')
     if st.button('Send'):
         response = send_data(user, message)
-        st.write(response.json())
+        st.write(response)
     st.text('Chat History')
 
 if __name__ == "__main__":
