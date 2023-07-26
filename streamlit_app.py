@@ -26,8 +26,8 @@ if st.button('Send'):
             "inputs": {},
             "query": user_input,
             "response_mode": "streaming",
+            "user": "abc-123",
             "conversation":
-            "user": "abc-123"
         })
 
         # Request
