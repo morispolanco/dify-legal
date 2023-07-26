@@ -2,8 +2,8 @@ import streamlit as st
 import requests
 
 headers = {
-    'Authorization: Bearer app-cGt4ZVQJ94qGNMthIXMPQj1l',
-    'Content-Type: application/json',
+    'Authorization': 'Bearer app-cGt4ZVQJ94qGNMthIXMPQj1l',
+    'Content-Type': 'application/json',
 }
 
 def send_message(message):
@@ -16,7 +16,7 @@ def send_message(message):
         ]
     }
 
-    response = requests.post('https://api.dify.ai/v1', headers=headers, json=data)
+    response = requests.post('https://api.dify.ai/v1/chat-messages', headers=headers, json=data)
 
     if response.status_code == 200:
         return response.json()['content']
@@ -25,7 +25,6 @@ def send_message(message):
 
 def main():
     st.title("LeybotGt")
-
 
     user_input = st.text_input("Tu pregunta:")
 
