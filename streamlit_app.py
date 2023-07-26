@@ -26,7 +26,7 @@ if st.button('Send'):
             "inputs": {},
             "query": user_input,
             "response_mode": "streaming",
-            "conversation_id": "vEbc2xBhFVj24l6w",
+            "conversation_id": "",
             "user": "abc-123"
         })
 
