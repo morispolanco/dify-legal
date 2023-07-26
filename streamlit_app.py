@@ -4,7 +4,7 @@ import requests
 
 
 def send_message(query):
-    url = 'https://api.dify.ai/v1/messages'
+    url = 'https://api.dify.ai/v1/chat'
     headers = {
         'Authorization': 'Bapp-cGt4ZVQJ94qGNMthIXMPQj1l',
         'Content-Type': 'application/json',
