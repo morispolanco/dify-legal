@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 def send_message(query):
-    url = 'https://api.dify.ai/v1/chat-messages'
+    url = 'https://api.dify.ai/v1'
     headers = {
         'Authorization': 'Bapp-cGt4ZVQJ94qGNMthIXMPQj1l',
         'Content-Type': 'application/json',
