@@ -13,8 +13,8 @@ def send_data(user, message):
         "inputs": {},
         "query": message,
         "response_mode": "streaming",
-        "conversation_id": 
-        "user":
+        "conversation_id"
+        "user"
     }
     response = requests.post(url, headers=headers, json=data)
     try:
