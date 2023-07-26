@@ -18,6 +18,7 @@ def send_message(query):
     try:
         response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
+        
         response_json = json.loads(response.text)
         return response_json
     except requests.exceptions.HTTPError as e:
