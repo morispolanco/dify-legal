@@ -6,24 +6,6 @@ headers = {
     'Content-Type': 'application/json',
 }
 
-def send_message(message):
-    data = {
-        'inputs': {},
-        'messages': [
-            {
-                'role': "user",
-                'content': message,
-            }
-        ]
-    }
-
-    response = requests.post('https://api.dify.ai/v1/chat-messages', headers=headers, json=data)
-
-    if response.status_code == 200:
-        return response.json()['content']
-    else:
-        return f'Error (Código {response.status_code}): {response.text}'
-
 def main():
     st.title("LeybotGt")
 
