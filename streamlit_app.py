@@ -3,7 +3,7 @@ import requests
 
 headers = {
     'Authorization: Bearer app-cGt4ZVQJ94qGNMthIXMPQj1l',
-    "Content-Type": "application/json",
+    'Content-Type: application/json',
 }
 
 def send_message(message):
