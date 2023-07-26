@@ -18,9 +18,13 @@ def send_message(query):
     try:
         response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
-        
+
         response_json = response.json()
-        return response_json
+
+        if 'answer' in response_json:
+            return response_json['answer']
+        else:
+            return f'Error: The response did not contain a valid answer field. Response data: {response_json}'
     except requests.exceptions.HTTPError as e:
         return f'Error (Code {e.response.status_code}): {e.response.text}'
     except json.JSONDecodeError as e:
