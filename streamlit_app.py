@@ -16,7 +16,7 @@ def send_message(message):
         ]
     }
 
-    response = requests.post('https://api.dify.ai/v1/chat-messages', headers=headers, json=data)
+    response = requests.post('https://api.dify.ai/v1', headers=headers, json=data)
 
     if response.status_code == 200:
         return response.json()['content']
