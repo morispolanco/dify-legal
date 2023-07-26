@@ -1,12 +1,12 @@
 import requests
 import streamlit as st
 import json
- 
+
 # Streamlit Configuration
 st.set_page_config(page_title='Chat Application')
 
 # Variables
-secret_key = st.secrets['app-cGt4ZVQJ94qGNMthIXMPQj1l']
+secret_key = "app-cGt4ZVQJ94qGNMthIXMPQj1l"  # Replace with your actual key
 url = 'https://api.dify.ai/v1/chat-messages'
 
 # Headers
