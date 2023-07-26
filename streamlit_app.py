@@ -27,8 +27,7 @@ if st.button('Send'):
             "query": user_input,
             "response_mode": "streaming",
             "user": "abc-123",
-            "conversation":
-        })
+                    })
 
         # Request
         response = requests.request("POST", url, headers=headers, data=data)
