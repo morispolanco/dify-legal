@@ -12,8 +12,8 @@ def send_chat_message(query, conversation_id, user):
         "inputs": {},
         "query": query,
         "response_mode": "streaming",
+        "user": user,
         "conversation_id": conversation_id,
-        "user": user
     }
 
     response = requests.post(url, headers=headers, json=payload)
