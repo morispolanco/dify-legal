@@ -1,64 +1,39 @@
-import streamlit as st
 import requests
-import time
+import streamlit as st
+import json
 
-API_KEY = 'app-cGt4ZVQJ94qGNMthIXMPQj1l'
+# Streamlit Configuration
+st.set_page_config(page_title='Chat Application')
 
-conversation_id = '1c7e55fb-1ba2-4e10-81b5-30addcea2276' 
+# Variables
+secret_key = st.secrets['app-cGt4ZVQJ94qGNMthIXMPQj1l']
+url = 'https://api.dify.ai/v1/chat-messages'
 
-def get_response(query):
-  
-  headers = {
-    'Authorization': f'Bearer {API_KEY}',
-    'Content-Type': 'application/json' 
-  }
+# Headers
+headers = {
+    'Authorization': 'Bearer '+secret_key,
+    'Content-Type': 'application/json'
+}
 
-  data = {
-    'inputs': {},
-    'query': query,
-    'response_mode': 'streaming',
-    'conversation_id': conversation_id,  
-    'user': 'abc-123'
-  }
+# Input Field
+user_input = st.text_input("Say something")
 
-  try:
-    response = requests.post('https://api.dify.ai/v1/chat-messages', headers=headers, json=data)
-    response.raise_for_status()
-    output = response.json()
-  except requests.exceptions.RequestException as e:
-    print('API call failed:', e)
-    output = {'message': 'Sorry, I am having trouble connecting right now. Please try again later.'}
+if st.button('Send'):
+    if user_input:
 
-  time.sleep(1) # add delay between API calls
-  
-  return output['message']
+        # Data
+        data = json.dumps({
+            "inputs": {},
+            "query": user_input,
+            "response_mode": "streaming",
+            "conversation_id": "1c7e55fb-1ba2-4e10-81b5-30addcea2276",
+            "user": "abc-123"
+        })
 
-if 'generated' not in st.session_state:
-  st.session_state['generated'] = []
+        # Request
+        response = requests.request("POST", url, headers=headers, data=data)
 
-if 'past' not in st.session_state:
-  st.session_state['past'] = []
-  
-def get_text():
-  input_text = st.text_input("You: ", "Hello!", key="input")
-  return input_text
-
-user_input = get_text()
-
-if user_input:
-  output = get_response(user_input)
-  
-  st.session_state.past.append(user_input)
-  st.session_state.generated.append(output)
-
-if st.session_state['generated']:
-
-  for i in range(len(st.session_state['generated'])-1, -1, -1):
-    message = st.session_state['generated'][i]
-    st.write(f"Bot: {message}")
-    
-  for i in range(len(st.session_state['past'])-1, -1, -1):
-    message = st.session_state['past'][i]
-    st.write(f"You: {message}")
-    
-st.text("Press Enter to send message")
+        # Response
+        st.write(response.json())
+    else:
+        st.write('Input field is empty')
