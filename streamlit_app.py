@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import json
 
 def send_message(query):
     url = 'https://api.dify.ai/v1/chat-messages'
@@ -14,12 +15,18 @@ def send_message(query):
         "user": "abc-123"
     }
 
-    response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status()
-    return response.json()
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
+        response_json = json.loads(response.text)
+        return response_json
+    except requests.exceptions.HTTPError as e:
+        return f'Error (Código {e.response.status_code}): {e.response.text}'
+    except json.JSONDecodeError as e:
+        return f'Error decoding JSON response: {response.text}'
 
 def main():
-    st.title("CLeybotGt")
+    st.title("Chat App")
 
     user_input = st.text_input("Enter a message:")
 
