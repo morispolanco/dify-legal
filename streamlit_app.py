@@ -1,35 +1,30 @@
 import streamlit as st
 import requests
 
-headers = {
-    'Authorization': 'Bearer app-cGt4ZVQJ94qGNMthIXMPQj1l',
-    'Content-Type': 'application/json',
-}
-
-def send_message(message):
-    data = {
-        'messages': [
-            {
-                'role': "user",
-                'content': message,
-            }
-        ]
+def send_message(query):
+    url = 'https://api.dify.ai/v1/chat-messages'
+    headers = {
+        'Authorization': 'Bapp-cGt4ZVQJ94qGNMthIXMPQj1l',
+        'Content-Type': 'application/json',
+    }
+    payload = {
+        "inputs": {},
+        "query": query,
+        "response_mode": "streaming",
+        "user": "abc-123"
     }
 
-    response = requests.post('https://api.dify.ai/v1/chat-messages', headers=headers, json=data)
-
-    if response.status_code == 200:
-        return response.json()['content']
-    else:
-        return f'Error (Código {response.status_code}): {response.text}'
+    response = requests.post(url, headers=headers, json=payload)
+    response.raise_for_status()
+    return response.json()
 
 def main():
-    st.title("LeybotGt")
+    st.title("CLeybotGt")
 
-    user_input = st.text_input("Tu pregunta:")
+    user_input = st.text_input("Enter a message:")
 
-    if st.button("Enviar"):
-        st.write("Tú:", user_input)
+    if st.button("Send"):
+        st.write("You:", user_input)
         response = send_message(user_input)
         st.write("Chatbot:", response)
 
