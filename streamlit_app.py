@@ -24,15 +24,15 @@ def send_message(query):
     except requests.exceptions.HTTPError as e:
         return f'Error (Código {e.response.status_code}): {e.response.text}'
     except json.JSONDecodeError as e:
-        return f'Error decoding JSON response: {response.text}'
+        return f'Error al decodificar la respuesta JSON: {response.text}'
 
 def main():
-    st.title("Chat App")
+    st.title("Aplicación de Chat")
 
-    user_input = st.text_input("Enter a message:")
+    user_input = st.text_input("Ingrese un mensaje:")
 
-    if st.button("Send"):
-        st.write("You:", user_input)
+    if st.button("Enviar"):
+        st.write("Usted:", user_input)
         response = send_message(user_input)
         st.write("Chatbot:", response)
 
