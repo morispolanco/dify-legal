@@ -5,7 +5,7 @@ import json
 def send_chat_message(query, conversation_id, user):
     url = 'https://api.dify.ai/v1/chat-messages'
     headers = {
-        'Authorization': 'Bearer app-cGt4ZVQJ94qGNMthIXMPQj1l',
+        'Authorization': 'Bearer ENTER-YOUR-SECRET-KEY',
         'Content-Type': 'application/json',
     }
     payload = {
@@ -13,7 +13,8 @@ def send_chat_message(query, conversation_id, user):
         "query": query,
         "response_mode": "streaming",
         "user": user,
-        "conversation_id": }
+        "conversation_id": conversation_id
+    }
 
     response = requests.post(url, headers=headers, json=payload)
     response.raise_for_status()
@@ -22,6 +23,7 @@ def send_chat_message(query, conversation_id, user):
 
 # Example usage
 query = "es-ES"
+conversation_id = "1c7e55fb-1ba2-4e10-81b5-30addcea2276"
 user = "Moris"
 
 response = send_chat_message(query, conversation_id, user)
