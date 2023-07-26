@@ -13,7 +13,7 @@ def send_chat_message(query, conversation_id, user):
         "query": query,
         "response_mode": "streaming",
         "user": user,
-        "conversation_id": conversation_id,
+        "conversation_id": 
     }
 
     response = requests.post(url, headers=headers, json=payload)
