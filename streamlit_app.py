@@ -19,20 +19,20 @@ def send_message(query):
         response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
         
-        response_json = json.loads(response.text)
+        response_json = response.json()
         return response_json
     except requests.exceptions.HTTPError as e:
-        return f'Error (Código {e.response.status_code}): {e.response.text}'
+        return f'Error (Code {e.response.status_code}): {e.response.text}'
     except json.JSONDecodeError as e:
-        return f'Error al decodificar la respuesta JSON: {response.text}'
+        return f'Error decoding JSON response: {response.text}'
 
 def main():
-    st.title("Aplicación de Chat")
+    st.title("Chat Application")
 
-    user_input = st.text_input("Ingrese un mensaje:")
+    user_input = st.text_input("Enter a message:")
 
-    if st.button("Enviar"):
-        st.write("Usted:", user_input)
+    if st.button("Send"):
+        st.write("You:", user_input)
         response = send_message(user_input)
         st.write("Chatbot:", response)
 
