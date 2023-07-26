@@ -8,6 +8,7 @@ headers = {
 
 def send_message(message):
     data = {
+        'inputs': {},
         'messages': [
             {
                 'role': "user",
