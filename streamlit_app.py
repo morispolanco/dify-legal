@@ -1,7 +1,7 @@
 import requests
 import streamlit as st
 import json
-
+ 
 # Streamlit Configuration
 st.set_page_config(page_title='Chat Application')
 
