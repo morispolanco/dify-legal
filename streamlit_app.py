@@ -14,7 +14,7 @@ def send_data(user, message):
         "query": message,
         "response_mode": "streaming",
         "conversation_id": 
-        "user": user
+        "user":
     }
     response = requests.post(url, headers=headers, json=data)
     try:
