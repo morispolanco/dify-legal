@@ -14,10 +14,17 @@ def send_data(user, message):
         "inputs": {},
         "query": message,
         "response_mode": "streaming",
+        "conversation_id": "1c7e55fb-1ba2-4e10-81b5-30addcea2276",
         "user": user
     }
     response = requests.post(url, headers=headers, json=data)
-    return response
+    try:
+        response_json = response.json()
+    except ValueError:
+        st.write(f'Response status code: {response.status_code}')
+        st.write(f'Response content: {response.content}')
+        response_json = None
+    return response_json
 
 def run_chat():
     st.title('Streamlit Chat App')
