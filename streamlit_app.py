@@ -1,7 +1,8 @@
 import streamlit as st
 import requests
+from datetime import datetime
 
-secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ'
+secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ'  # Reemplace con su clave secreta
 
 def send_data(user, message):
     url = 'https://api.dify.ai/v1/chat-messages'
@@ -13,27 +14,27 @@ def send_data(user, message):
         "inputs": {},
         "query": message,
         "response_mode": "streaming",
-        "conversation_id":  "", # Empty conversation id
-        "user": "" # Empty user
+        "conversation_id": "",  # Reemplace con el ID de la conversación que desea utilizar
+        "user": ""
     }
     response = requests.post(url, headers=headers, json=data)
     try:
         response = response.json()
     except ValueError:
-        st.write('Server response might not contain JSON content.')
-        st.write(f'Response status code: {response.status_code}')
-        st.write(f'Response content: {response.content}')
+        st.write('La respuesta del servidor puede que no contenga contenido en JSON.')
+        st.write(f'Código de estado de la respuesta: {response.status_code}')
+        st.write(f'Contenido de la respuesta: {response.content}')
     return response
 
 def run_chat():
-    st.title('Streamlit Chat App')
-    st.subheader('Enter your username and messages')
-    user = st.text_input('Username')
-    message = st.text_input('Message')
-    if st.button('Send'):
+    st.title('Aplicación de Chat Streamlit')
+    st.subheader('Ingrese su nombre de usuario y mensajes')
+    user = st.text_input('Nombre de usuario')
+    message = st.text_input('Mensaje')
+    if st.button('Enviar'):
         response = send_data(user, message)
         st.write(response)
-    st.text('Chat History')
+    st.text('Historial de Chat')
 
 if __name__ == "__main__":
     run_chat()
