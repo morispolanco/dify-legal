@@ -5,7 +5,7 @@ from datetime import datetime
 secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ'  # Reemplace con su clave secreta
 
 def send_data(user, message):
-    url = 'https://api.dify.ai/v1/chat-messages'
+    url = 'https://api.dify.ai/v1'
     headers = {
         'Authorization': f'Bearer {secret_key}',
         'Content-Type': 'application/json'
