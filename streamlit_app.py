@@ -12,10 +12,10 @@ def send_data(user, message):
     }
     data = {
         "inputs": {},
-        "query": "message",
+        "query": "eh",
         "response_mode": "streaming",
         "conversation_id": "",  # Reemplace con el ID de la conversación que desea utilizar
-        "user": ""
+        "user": "Moris"
     }
     response = requests.post(url, headers=headers, json=data)
     try:
