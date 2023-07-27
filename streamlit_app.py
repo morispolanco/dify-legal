@@ -18,7 +18,7 @@ def send_data(user, message):
         "user": user
     }
     response = requests.post(url, headers=headers, json=data)
-
+    return response.json()  # Agregado en esta línea
 
 def run_chat():
     st.title('Aplicación de Chat Streamlit')
