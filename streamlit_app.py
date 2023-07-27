@@ -23,11 +23,7 @@ def send_data(user, message):
     else:
         return f'Error (Código {response.status_code}): {response.text}'
 
-    except ValueError:
-        st.write('La respuesta del servidor puede que no contenga contenido en JSON.')
-        st.write(f'Código de estado de la respuesta: {response.status_code}')
-        st.write(f'Contenido de la respuesta: {response.content}')
-    return response
+   
 
 def run_chat():
     st.title('Aplicación de Chat Streamlit')
