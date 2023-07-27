@@ -11,14 +11,8 @@ HEADERS = {
 }
 
 # Function to send a message to the API
-def send_message(message, query, conversation_id, user):
-    data = {
-        "inputs": {},
-        "query": query,
-        "response_mode": "streaming",
-        "conversation_id": "",
-        "user": ""
-    }
+def send_message(message):
+    data = {"message": message}
     response = requests.post(API_ENDPOINT, headers=HEADERS, data=json.dumps(data))
     return response.json()
 
@@ -31,5 +25,5 @@ user_input = st.text_input("Enter a message")
 # When the user clicks the 'Send' button,
 # the message is sent to the API and the response is displayed.
 if st.button('Send'):
-    response = send_message(message=user_input, query=query_input, conversation_id=conversation_id_input, user=user_input_id)
+    response = send_message(message=user_input)
     st.write('Chatbot response:', response.get('response', 'No response available'))
