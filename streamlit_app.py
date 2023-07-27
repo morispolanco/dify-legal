@@ -12,9 +12,9 @@ HEADERS = {
 
 # Function to send a message to the API
 def send_message(message):
-    data = {"message": message}
+    data = {"inputs": message}  # replace "message" with "inputs"
     try:
-        response = requests.post(API_ENDPOINT, headers=HEADERS, data=json.dumps(data))
+        response = requests.post(API_ENDPOINT, headers=HEADERS, json=data)  # replace data=json.dumps(data) with json=data
         response.raise_for_status()  # raise exception if status is not 200
     except requests.exceptions.HTTPError as errh:
         st.write("HTTP Error:", errh)
