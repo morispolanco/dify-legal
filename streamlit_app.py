@@ -1,34 +1,29 @@
+# Import necessary libraries
 import streamlit as st
 import requests
-from datetime import datetime
+import json
 
-secret_key = 'app-OZw6qix4wsjQl4MUTmlpEukZ'  # Reemplace con su clave secreta
+# API configuration
+API_ENDPOINT = "https://api.dify.ai/v1/chat-messages"
+HEADERS = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer app-OZw6qix4wsjQl4MUTmlpEukZ'
+}
 
-def send_data(user, message):
-    url = 'https://api.dify.ai/v1/chat-messages'
-    headers = {
-        'Authorization': f'Bearer {secret_key}',
-        'Content-Type': 'application/json'
-    }
-    data = {
-        "inputs": {},
-        "query": message,
-        "response_mode": "streaming",
-        "conversation_id": "",
-        "user": user
-    }
-    response = requests.post(url, headers=headers, json=data)
-    return response.json()  # Agregado en esta línea
+# Function to send a message to the API
+def send_message(message):
+    data = {"message": message}
+    response = requests.post(API_ENDPOINT, headers=HEADERS, data=json.dumps(data))
+    return response.json()
 
-def run_chat():
-    st.title('Aplicación de Chat Streamlit')
-    st.subheader('Ingrese su nombre de usuario y mensajes')
-    user = st.text_input('Nombre de usuario')
-    message = st.text_input('Mensaje')
-    if st.button('Enviar'):
-        response = send_data(user, message)
-        st.write(response)
-    st.text('Historial de Chat')
+# Title
+st.title("Chatbot")
 
-if __name__ == "__main__":
-    run_chat()
+# User input
+user_input = st.text_input("Enter a message")
+
+# When the user clicks the 'Send' button,
+# the message is sent to the API and the response is displayed.
+if st.button('Send'):
+    response = send_message(message=user_input)
+    st.write('Chatbot response:', response.get('response', 'No response available'))
