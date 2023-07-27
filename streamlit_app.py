@@ -18,8 +18,11 @@ def send_data(user, message):
         "user": "Moris"
     }
     response = requests.post(url, headers=headers, json=data)
-    try:
-        response = response.json()
+    if response.status_code == 200:
+        return response.json()['content']
+    else:
+        return f'Error (Código {response.status_code}): {response.text}'
+
     except ValueError:
         st.write('La respuesta del servidor puede que no contenga contenido en JSON.')
         st.write(f'Código de estado de la respuesta: {response.status_code}')
