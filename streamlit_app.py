@@ -14,7 +14,7 @@ def send_data(user, message):
         "inputs": {},
         "query": "eh",
         "response_mode": "streaming",
-        "conversation_id": "",  # Reemplace con el ID de la conversación que desea utilizar
+        "conversation_id": "", 
         "user": "Moris"
     }
     response = requests.post(url, headers=headers, json=data)
@@ -22,8 +22,6 @@ def send_data(user, message):
         return response.json()['content']
     else:
         return f'Error (Código {response.status_code}): {response.text}'
-
-   
 
 def run_chat():
     st.title('Aplicación de Chat Streamlit')
