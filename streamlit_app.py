@@ -16,8 +16,8 @@ def send_message(message, query, conversation_id, user):
         "inputs": {},
         "query": query,
         "response_mode": "streaming",
-        "conversation_id": conversation_id,
-        "user": user
+        "conversation_id": "",
+        "user": ""
     }
     response = requests.post(API_ENDPOINT, headers=HEADERS, data=json.dumps(data))
     return response.json()
@@ -27,9 +27,6 @@ st.title("Chatbot")
 
 # User input
 user_input = st.text_input("Enter a message")
-query_input = st.text_input("Enter a query")
-conversation_id_input = st.text_input("Enter a conversation ID")
-user_input_id = st.text_input("Enter a User ID")
 
 # When the user clicks the 'Send' button,
 # the message is sent to the API and the response is displayed.
